@@ -12,6 +12,7 @@ const choices = document.getElementById('choices');
 const answerButtons = document.getElementById('answer'); 
 const nextQuestion = document.getElementById('next-question');
 const finalScore = document.getElementById('final-score');
+const feedbackDisplay = document.getElementById('feedback-display');
 
 // question set
 
@@ -50,7 +51,24 @@ const checkCorrect = (answer) => {
     } 
     else {
         feedback.textContent = 'WRONG!';
+        time -= 10;
     }
+}
+
+const timerFunction = () => {
+    let interval = setInterval(function() {
+         timer.textContent = time;
+         time--;
+         if(time < 0) {
+            clearInterval(interval);
+            timer.textContent = 'TIME IS UP!'
+            questionDisplay.classList.toggle('hide');
+            endScreen.classList.toggle('hide');
+            feedbackDisplay.classList.toggle('hide');
+            finalScore.textContent = score;
+         }
+
+    }, 1000)    
 }
 
 // event listeners
@@ -58,6 +76,7 @@ const checkCorrect = (answer) => {
 startButton.addEventListener('click', () => {
     startScreen.classList.toggle('hide');
     questionDisplay.classList.toggle('hide');
+    timerFunction();
     displayQuestion();
     displayAnswers();
 });
