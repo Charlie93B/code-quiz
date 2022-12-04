@@ -86,3 +86,8 @@ li:nth-child(odd) {
   top: 10px;
   right: 10px;
 }
+
+
+.no-click {
+  pointer-events: none;
+}
