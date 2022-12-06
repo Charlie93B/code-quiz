@@ -9,7 +9,6 @@ const startButton = document.getElementById('start');
 const submitButton = document.getElementById('submit');
 const questionTitle = document.getElementById('question-title');
 const choices = document.getElementById('choices');
-const answerButtons = document.getElementById('answer'); 
 const nextQuestion = document.getElementById('next-question');
 const finalScore = document.getElementById('final-score');
 const feedbackDisplay = document.getElementById('feedback-display');
@@ -26,25 +25,17 @@ const displayQuestion = () => {
     questionTitle.textContent = Questions[questionNumber].question;
 }
 
-// let randomiseAnswers = () => {
-//     let randomArr = [];
-//     while(Questions[questionNumber].answers.length > 0) {
-//         let randomAnswer = Math.floor(Math.random() * Questions[questionNumber].answers.length);
-//         randomArr.push(Questions[questionNumber].answers[randomAnswer]);
-//         Questions[questionNumber].answers.splice(Questions[questionNumber].answers[randomAnswer], 1)
-
-//     }
-//     return randomArr;
-// }
 
 const displayAnswers = () => {
     
     Questions[questionNumber].answers.forEach((item) => {
         let button = document.createElement('button');
+
         button.textContent = item[0];
         button.setAttribute('data-correct', item[1])
         button.id = 'answer'
         choices.appendChild(button);
+
         button.addEventListener('click', () => {
             let isCorrect = button.getAttribute('data-correct');
             checkCorrect(isCorrect);
@@ -62,6 +53,7 @@ const checkCorrect = (answer) => {
         feedback.textContent = 'CORRECT!';
         score++;
     } 
+
     else {
         feedback.textContent = 'WRONG!';
         time -= 10;
@@ -99,7 +91,6 @@ const handleSubmit = () => {
         scores: []
     }
 
-    // let userArr = `${initials} - ${score}`;
     let userArr = [initials, score];
     let usersString;
     let getUsers = localStorage.getItem('users')

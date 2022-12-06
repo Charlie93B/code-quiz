@@ -1,5 +1,5 @@
 const highscores = document.getElementById('highscores');
-
+const clearScores = document.getElementById('clear')
 
 // get scores
 
@@ -30,4 +30,9 @@ for(let i = 0; i < scoresArr.length; i++) {
     highscores.appendChild(listItem);
 }
 
-console.log(getScores());
+// event listeners
+
+clearScores.addEventListener('click', () => {
+    localStorage.clear();
+    location.reload();
+})
