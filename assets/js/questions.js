@@ -11,8 +11,8 @@ export const Questions = [
     {
         question: 'How do you create a double line comment?',
         answers: [
-            ['/* */', true],
             ['comment()', false],
+            ['/* */', true],
             ['##', false],
             ['//', false]
         ]
@@ -20,9 +20,9 @@ export const Questions = [
     {
         question: 'Which of these can you not use to declare a variable?',
         answers: [
-            ['declareVariable()', true],
             ['const', false],
             ['var', false],
+            ['declareVariable()', true],
             ['let', false]
         ]
     },
@@ -38,17 +38,17 @@ export const Questions = [
     {
         question: 'What bracket type do you need to define an array?',
         answers: [
-            ['[', true],
             ['{', false],
             ['c', false],
-            ['<', false]
+            ['<', false],
+            ['[', true]
         ]
     },
     {
         question: 'How do you set an item in localstorage?',
         answers: [
-            ['localStorage.setItem()', true],
             ['storeItem()', false],
+            ['localStorage.setItem()', true],
             ['localStorage++', false],
             ['<localStorage />', false]
         ]
@@ -65,10 +65,10 @@ export const Questions = [
     {
         question: 'An if statement is enlosed with ___',
         answers: [
-            ['()', true],
             ['{}', false],
             ['[]', false],
-            ['**', false]
+            ['**', false],
+            ['()', true]
         ]
     },
     {

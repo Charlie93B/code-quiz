@@ -13,6 +13,7 @@ const answerButtons = document.getElementById('answer');
 const nextQuestion = document.getElementById('next-question');
 const finalScore = document.getElementById('final-score');
 const feedbackDisplay = document.getElementById('feedback-display');
+const initialInput = document.getElementById('initials');
 
 // question set
 
@@ -25,7 +26,19 @@ const displayQuestion = () => {
     questionTitle.textContent = Questions[questionNumber].question;
 }
 
+// let randomiseAnswers = () => {
+//     let randomArr = [];
+//     while(Questions[questionNumber].answers.length > 0) {
+//         let randomAnswer = Math.floor(Math.random() * Questions[questionNumber].answers.length);
+//         randomArr.push(Questions[questionNumber].answers[randomAnswer]);
+//         Questions[questionNumber].answers.splice(Questions[questionNumber].answers[randomAnswer], 1)
+
+//     }
+//     return randomArr;
+// }
+
 const displayAnswers = () => {
+    
     Questions[questionNumber].answers.forEach((item) => {
         let button = document.createElement('button');
         button.textContent = item[0];
@@ -67,8 +80,42 @@ const timerFunction = () => {
             feedbackDisplay.classList.toggle('hide');
             finalScore.textContent = score;
          }
+         if( questionNumber > 9) {
+            clearInterval(interval);
+            timer.textContent = 'TIME IS UP!'
+            questionDisplay.classList.toggle('hide');
+            endScreen.classList.toggle('hide');
+            feedbackDisplay.classList.toggle('hide');
+            finalScore.textContent = score;
+         }
 
     }, 1000)    
+}
+
+const handleSubmit = () => {
+    let initials = initialInput.value
+
+    let users = {
+        scores: []
+    }
+
+    // let userArr = `${initials} - ${score}`;
+    let userArr = [initials, score];
+    let usersString;
+    let getUsers = localStorage.getItem('users')
+
+    if(getUsers === null) {
+        users.scores.push(userArr);
+        usersString = JSON.stringify(users);
+        localStorage.setItem('users', usersString);
+    }
+
+    else {
+        let usersObj = JSON.parse(getUsers);
+        usersObj.scores.push(userArr);
+        usersString = JSON.stringify(usersObj);
+        localStorage.setItem('users', usersString);
+    }
 }
 
 // event listeners
@@ -82,7 +129,7 @@ startButton.addEventListener('click', () => {
 });
 
 submitButton.addEventListener('click', () => {
-
+    handleSubmit();
 })
 
 nextQuestion.addEventListener('click', () => {
